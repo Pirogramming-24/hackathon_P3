@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'contents',
     'q&a',
     'notice',
-    'checkpoint'.
+    'checkpoint',
     'progress',
     'device',
     'session',
