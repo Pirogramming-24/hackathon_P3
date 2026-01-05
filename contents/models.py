@@ -18,15 +18,14 @@ class Contents(models.Model):
         prefix = "[진도]" if self.is_progress else "[일반]"
         return f"{prefix} {self.text}"
 
-class Feedback(models.Model):
-    # 어떤 콘텐츠(특히 진도)에 대한 피드백인지 연결
-    session_id = models.ForeignKey(Session, )
+# class Feedback(models.Model):
+#     session_id = models.ForeignKey(Session, )
 
-    
-    content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='feedbacks')
-    session_key = models.CharField(max_length=40, db_index=True)
-    reaction = models.CharField(max_length=10, choices=[('GOOD', '좋아요'), ('BAD', '싫어요')])
-    updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        unique_together = ('content', 'session_key')
+#     content = models.ForeignKey(Content, on_delete=models.CASCADE, related_name='feedbacks')
+#     session_key = models.CharField(max_length=40, db_index=True)
+#     reaction = models.CharField(max_length=10, choices=[('GOOD', '좋아요'), ('BAD', '싫어요')])
+#     updated_at = models.DateTimeField(auto_now=True)
+
+#     class Meta:
+#         unique_together = ('content', 'session_key')
