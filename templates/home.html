@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piro Hackathon</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+<body>
+    
+    <div class="container">
+        <header class="header-logo">
+            <div class="logo-img"></div>
+        </header>
+
+        <section class="role-selection">
+            <button class="role-box" onclick="selectRole('participant')">참여자</button>
+            <button class="role-box" onclick="selectRole('session_lead')">세션자</button>
+        </section>
+
+        <section class="date-section hidden"> <div class="date-trigger" onclick="toggleDateMenu()">
+                <span>&gt; 날짜를 선택해주세요</span>
+            </div>
+
+            <form id="date-form" class="date-options hidden" method="GET">
+                
+                <select id="week" name="week" onchange="checkAllSelected()">
+                    <option value="" disabled selected>주차 선택</option>
+                    <option value="1">1주차</option>
+                    <option value="2">2주차</option>
+                    <option value="3">3주차</option>
+                    <option value="4">4주차</option>
+                    <option value="5">5주차</option>
+                </select>
+
+                <select id="day" name="day" onchange="checkAllSelected()">
+                    <option value="" disabled selected>요일 선택</option>
+                    <option value="Tue">화요일</option>
+                    <option value="Thu">목요일</option>
+                    <option value="Sat">토요일</option>
+                </select>
+
+                <select id="time" name="time" onchange="checkAllSelected()">
+                    <option value="" disabled selected>시간 선택</option>
+                    <option value="AM">오전</option>
+                    <option value="PM">오후</option>
+                </select>
+                
+                <button type="submit" id="submit-btn" class="submit-btn hidden">Enter</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        // 현재 선택된 역할이 무엇인지 저장할 변수
+        let currentRole = ''; 
+
+        // 1. 역할 선택 함수
+        function selectRole(role) {
+            // 변수에 현재 역할 저장 ('participant' 또는 'session_lead')
+            currentRole = role;
+            console.log("현재 선택된 역할:", currentRole);
+
+            // 스타일 변경 (선택된 박스 초록색으로)
+            document.querySelectorAll('.role-box').forEach(box => box.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // ★ 중요: 세션자든 참여자든 무조건 날짜 선택창을 보여줍니다.
+            document.querySelector('.date-section').classList.remove('hidden');
+            
+            // 역할을 바꿀 때마다 목적지를 미리 설정해둡니다.
+            setDestination();
+        }
+
+        // 2. 목적지(URL) 설정 함수
+        function setDestination() {
+            const form = document.getElementById('date-form');
+            
+            if (currentRole === 'session_lead') {
+                // 세션자라면 -> 관리자 페이지로
+                form.action = "/session-admin/";
+            } else {
+                // 참여자라면(또는 그 외) -> 사용자 페이지로
+                form.action = "/user/";
+            }
+        }
+
+        // 3. 날짜 메뉴 토글
+        function toggleDateMenu() {
+            const options = document.getElementById('date-form');
+            options.classList.toggle('hidden');
+        }
+
+        // 4. 3가지 다 골랐는지 확인 (Enter 버튼 표시)
+        function checkAllSelected() {
+            const week = document.getElementById('week').value;
+            const day = document.getElementById('day').value;
+            const time = document.getElementById('time').value;
+            const btn = document.getElementById('submit-btn');
+
+            if (week && day && time) {
+                btn.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

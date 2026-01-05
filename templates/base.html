@@ -1,0 +1,18 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Piro Hackathon{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'base.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+
+
+<body>
+{%block content %}
+<!--여기는 제일 기본 틀만 적고, 세부사항은 base_user랑 base_admin.html 에 넣기-->
+{%endblock%}
+</body>
+</html>

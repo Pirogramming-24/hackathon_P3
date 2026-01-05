@@ -1,0 +1,10 @@
+{% load static %}
+{% extends 'base.html' %} <!--base. 상속을 받는다-->
+
+{% block extra_head %} 
+    {{block.super}}<!--css 등등 링크 넣는 곳-->
+{% endblock %}
+
+{%block content %}
+    {{block.super}}
+{%endblock%}
