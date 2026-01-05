@@ -1,5 +1,3 @@
-<!-- templates/sessions/main.html -->
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -124,6 +122,27 @@
             flex-direction: column;
             gap: 8px;
             margin-bottom: 24px;
+            max-height: calc(100vh - 200px);  /* 추가: 최대 높이 설정 */
+            overflow-y: auto;  /* 추가: 스크롤 가능하게 */
+        }
+
+        /* 스크롤바 스타일링 추가 (선택사항) */
+        .session-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .session-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .session-list::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+
+        .session-list::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
         }
         
         .session-item {
@@ -205,6 +224,7 @@
         
         .emotion-btn:hover {
             background: #f3f4f6;
+            transform: scale(1.1);
         }
         
         .emotion-btn.active-happy {
@@ -263,6 +283,12 @@
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .question-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .question-header {
@@ -333,6 +359,12 @@
             font-size: 14px;
         }
         
+        .reply-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
         .reply-submit {
             padding: 10px 20px;
             background: #3b82f6;
@@ -341,6 +373,7 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 500;
+            transition: all 0.2s;
         }
         
         .reply-submit:hover {
@@ -350,19 +383,33 @@
         .status-btn {
             background: #f3f4f6;
             border: none;
-            padding: 8px;
+            padding: 10px;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            min-height: 40px;
         }
         
         .status-btn:hover {
             background: #e5e7eb;
+            transform: scale(1.1);
         }
         
         .status-btn.answered {
             background: #dbeafe;
             color: #2563eb;
+        }
+        
+        .status-btn.answered:hover {
+            background: #bfdbfe;
+        }
+        
+        .status-btn svg {
+            stroke-width: 2.5;
         }
         
         /* 입력 폼 */
@@ -385,6 +432,7 @@
             cursor: pointer;
             border-radius: 8px;
             transition: background 0.2s;
+            font-size: 20px;
         }
         
         .file-btn:hover {
@@ -414,6 +462,9 @@
             cursor: pointer;
             font-weight: 500;
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .submit-btn:hover {
@@ -445,6 +496,7 @@
             justify-content: center;
             border-radius: 8px;
             font-size: 20px;
+            flex-shrink: 0;
         }
         
         .content-icon.link {
@@ -476,6 +528,12 @@
             text-decoration: underline;
         }
         
+        .content-image {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+        
         /* Notice 스타일 */
         .notice-list {
             display: flex;
@@ -500,6 +558,7 @@
         .notice-content {
             color: #6b7280;
             line-height: 1.6;
+            white-space: pre-wrap;
         }
         
         .notice-form {
@@ -519,6 +578,12 @@
             font-size: 14px;
         }
         
+        .form-input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
         .form-textarea {
             width: 100%;
             padding: 10px 12px;
@@ -530,9 +595,16 @@
             min-height: 80px;
         }
         
+        .form-textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
         .form-footer {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
             gap: 8px;
         }
         
@@ -555,6 +627,13 @@
                 padding: 16px;
             }
         }
+        
+        /* 빈 상태 스타일 */
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #9ca3af;
+        }
     </style>
 </head>
 <body>
@@ -572,9 +651,9 @@
         </div>
         
         <div class="tabs">
-            <button class="tab active" data-tab="qa">Q&A</button>
-            <button class="tab" data-tab="contents">Contents</button>
-            <button class="tab" data-tab="notice">Notice</button>
+            <button class="tab {% if current_tab == 'qa' %}active{% endif %}" data-tab="qa">Q&A</button>
+            <button class="tab {% if current_tab == 'contents' %}active{% endif %}" data-tab="contents">Contents</button>
+            <button class="tab {% if current_tab == 'notice' %}active{% endif %}" data-tab="notice">Notice</button>
         </div>
     </nav>
     
@@ -587,7 +666,7 @@
         <div class="session-list">
             {% for s in sessions %}
             <button class="session-item {% if s.id == session.id %}active{% endif %}" 
-                    onclick="location.href='{% if is_sessioner %}/sessioner/{{ s.id }}/{% else %}/participant/{{ s.id }}/{% endif %}'">
+                    onclick="location.href='{% if is_sessioner %}/sessioner/{{ s.id }}/?tab={{ current_tab }}{% else %}/participant/{{ s.id }}/?tab={{ current_tab }}{% endif %}'">
                 <div class="session-item-title">{{ s.title }}</div>
                 <div class="session-item-date">{{ s.date }}</div>
             </button>
@@ -597,32 +676,38 @@
     </aside>
     
     <!-- Q&A 탭 -->
-    <div class="tab-content active" id="qa-content">
-        <!-- 진도 체크 박스 -->
+    <div class="tab-content {% if current_tab == 'qa' %}active{% endif %}" id="qa-content">
+        <!-- 진도 체크 박스들 -->
+        {% for item in progress_data %}
         <div class="progress-check">
-            <span class="progress-label">진도 체크</span>
+            <span class="progress-label">{{ item.box.content }}</span>
             <div class="progress-controls">
                 {% if is_sessioner %}
                     <div class="emotion-stat">
                         <span style="font-size: 24px;">😊</span>
-                        <span class="stat-number happy">{{ progress_stats.happy|default:0 }}</span>
+                        <span class="stat-number happy" id="happy-count-{{ item.box.id }}">{{ item.stats.happy }}</span>
                     </div>
                     <div class="emotion-stat">
                         <span style="font-size: 24px;">😢</span>
-                        <span class="stat-number sad">{{ progress_stats.sad|default:0 }}</span>
+                        <span class="stat-number sad" id="sad-count-{{ item.box.id }}">{{ item.stats.sad }}</span>
                     </div>
                 {% else %}
-                    <button class="emotion-btn" data-emotion="happy">😊</button>
-                    <button class="emotion-btn" data-emotion="sad">😢</button>
+                    <button class="emotion-btn {% if item.user_emotion == 'happy' %}active-happy{% endif %}" 
+                            data-box-id="{{ item.box.id }}" 
+                            data-emotion="happy">😊</button>
+                    <button class="emotion-btn {% if item.user_emotion == 'sad' %}active-sad{% endif %}" 
+                            data-box-id="{{ item.box.id }}" 
+                            data-emotion="sad">😢</button>
                 {% endif %}
             </div>
         </div>
+        {% endfor %}
         
         <!-- 질문 목록 -->
         <div class="main-content">
             <div class="question-list">
                 {% for question in questions %}
-                <div class="question-card">
+                <div class="question-card" {% if is_sessioner and not question.reply %}onclick="toggleReplyForm({{ question.id }})"{% endif %}>
                     <div class="question-header">
                         <div class="question-content">
                             <div class="question-text">
@@ -641,24 +726,38 @@
                             </div>
                             {% endif %}
                             
-                            {% if is_sessioner and not question.reply %}
-                            <div class="reply-form" id="reply-form-{{ question.id }}" style="display: none;">
-                                <form method="post" action="{% url 'add_reply' question.id %}" style="display: flex; gap: 8px; flex: 1;">
-                                    {% csrf_token %}
-                                    <input type="text" name="reply" class="reply-input" placeholder="답변을 입력하세요..." required>
-                                    <button type="submit" class="reply-submit">전송</button>
-                                </form>
-                            </div>
+                            {% if is_sessioner %}
+                                {% if not question.reply %}
+                                <div class="reply-form" id="reply-form-{{ question.id }}" style="display: none;" onclick="event.stopPropagation();">
+                                    <form method="post" action="{% url 'add_reply' question.id %}" style="display: flex; gap: 8px; flex: 1;">
+                                        {% csrf_token %}
+                                        <input type="text" name="reply" class="reply-input" placeholder="답변을 입력하세요..." required>
+                                        <button type="submit" class="reply-submit">전송</button>
+                                    </form>
+                                </div>
+                                {% endif %}
                             {% endif %}
                         </div>
                         
                         {% if is_sessioner %}
                         <button class="status-btn {% if question.answered %}answered{% endif %}" 
-                                onclick="{% if question.answered %}toggleAnswered({{ question.id }}){% else %}showReplyForm({{ question.id }}){% endif %}">
-                            {% if question.answered %}✓{% else %}✗{% endif %}
+                                id="status-btn-{{ question.id }}"
+                                onclick="event.stopPropagation(); toggleAnswered({{ question.id }})">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="status-icon-{{ question.id }}">
+                                {% if question.answered %}
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                                {% else %}
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                {% endif %}
+                            </svg>
                         </button>
                         {% endif %}
                     </div>
+                </div>
+                {% empty %}
+                <div class="empty-state">
+                    <p>아직 질문이 없습니다.</p>
                 </div>
                 {% endfor %}
             </div>
@@ -667,40 +766,51 @@
         <!-- 질문 입력 폼 (참여자만) -->
         {% if not is_sessioner %}
         <div class="input-form">
-            <form method="post" action="{% url 'add_question' session.id %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center; flex: 1;">
+            <form method="post" action="{% url 'add_question' session.id %}" enctype="multipart/form-data" id="questionForm" style="display: flex; gap: 8px; align-items: center; flex: 1;">
                 {% csrf_token %}
-                <label class="file-btn">
-                    <input type="file" name="image" style="display: none;" accept="image/*">
+                <label class="file-btn" for="imageInput" style="cursor: pointer;">
                     📎
                 </label>
-                <input type="text" name="content" class="input-field" placeholder="질문을 입력하세요..." required>
-                <button type="submit" class="submit-btn">전송</button>
+                <input type="file" name="image" id="imageInput" style="display: none;" accept="image/*">
+                <input type="text" name="content" class="input-field" id="questionInput" placeholder="질문을 입력하세요..." required>
+                <button type="submit" class="submit-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
             </form>
         </div>
         {% endif %}
     </div>
     
     <!-- Contents 탭 -->
-    <div class="tab-content" id="contents-content">
-        <!-- 진도 체크 박스 -->
+    <div class="tab-content {% if current_tab == 'contents' %}active{% endif %}" id="contents-content">
+        <!-- 진도 체크 박스들 -->
+        {% for item in progress_data %}
         <div class="progress-check">
-            <span class="progress-label">진도 체크</span>
+            <span class="progress-label">{{ item.box.content }}</span>
             <div class="progress-controls">
                 {% if is_sessioner %}
                     <div class="emotion-stat">
                         <span style="font-size: 24px;">😊</span>
-                        <span class="stat-number happy">{{ progress_stats.happy|default:0 }}</span>
+                        <span class="stat-number happy" id="happy-count-contents-{{ item.box.id }}">{{ item.stats.happy }}</span>
                     </div>
                     <div class="emotion-stat">
                         <span style="font-size: 24px;">😢</span>
-                        <span class="stat-number sad">{{ progress_stats.sad|default:0 }}</span>
+                        <span class="stat-number sad" id="sad-count-contents-{{ item.box.id }}">{{ item.stats.sad }}</span>
                     </div>
                 {% else %}
-                    <button class="emotion-btn" data-emotion="happy">😊</button>
-                    <button class="emotion-btn" data-emotion="sad">😢</button>
+                    <button class="emotion-btn {% if item.user_emotion == 'happy' %}active-happy{% endif %}" 
+                            data-box-id="{{ item.box.id }}" 
+                            data-emotion="happy">😊</button>
+                    <button class="emotion-btn {% if item.user_emotion == 'sad' %}active-sad{% endif %}" 
+                            data-box-id="{{ item.box.id }}" 
+                            data-emotion="sad">😢</button>
                 {% endif %}
             </div>
         </div>
+        {% endfor %}
         
         <!-- 콘텐츠 목록 -->
         <div class="main-content">
@@ -717,10 +827,20 @@
                         {% if content.title %}<strong>{{ content.title }}</strong><br>{% endif %}
                         {% if content.content_type == 'link' %}
                         <a href="{{ content.content }}" target="_blank" class="content-link">{{ content.content }}</a>
+                        {% elif content.content_type == 'image' %}
+                        {{ content.content }}
+                        <br><img src="{{ content.file.url }}" alt="업로드 이미지" class="content-image">
+                        {% elif content.content_type == 'file' %}
+                        {{ content.content }}
+                        <br><a href="{{ content.file.url }}" target="_blank" class="content-link">📎 파일 다운로드</a>
                         {% else %}
                         {{ content.content }}
                         {% endif %}
                     </div>
+                </div>
+                {% empty %}
+                <div class="empty-state">
+                    <p>아직 업로드된 콘텐츠가 없습니다.</p>
                 </div>
                 {% endfor %}
             </div>
@@ -729,44 +849,68 @@
         <!-- 콘텐츠 입력 폼 (세션자만) -->
         {% if is_sessioner %}
         <div class="input-form">
-            <form method="post" action="{% url 'add_content' session.id %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center; flex: 1;">
+            <form method="post" action="{% url 'add_content' session.id %}" enctype="multipart/form-data" id="contentForm" style="display: flex; gap: 8px; align-items: center; flex: 1;">
                 {% csrf_token %}
-                <label class="file-btn">
-                    <input type="file" name="file" style="display: none;">
+                <label class="file-btn" for="contentFile" style="cursor: pointer;">
                     ➕
                 </label>
-                <label style="display: flex; align-items: center; gap: 4px; font-size: 14px;">
-                    <input type="checkbox" name="is_progress">
+                <input type="file" name="file" id="contentFile" style="display: none;">
+                <label style="display: flex; align-items: center; gap: 4px; font-size: 14px; cursor: pointer;">
+                    <input type="checkbox" name="is_progress" value="true">
                     진도
                 </label>
-                <input type="text" name="content" class="input-field" placeholder="내용을 입력하세요..." required>
-                <button type="submit" class="submit-btn">전송</button>
+                <input type="text" name="content" class="input-field" id="contentInput" placeholder="내용을 입력하세요..." required>
+                <button type="submit" class="submit-btn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                </button>
             </form>
         </div>
         {% endif %}
     </div>
     
     <!-- Notice 탭 -->
-    <div class="tab-content" id="notice-content">
+    <div class="tab-content {% if current_tab == 'notice' %}active{% endif %}" id="notice-content">
         <div class="main-content">
             <div class="notice-list">
                 {% for notice in notices %}
                 <div class="notice-card">
                     <div class="notice-title">{{ notice.title }}</div>
                     <div class="notice-content">{{ notice.content }}</div>
+                    {% if notice.file %}
+                    <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                        {% if notice.file.url|slice:"-4:" == ".png" or notice.file.url|slice:"-4:" == ".jpg" or notice.file.url|slice:"-5:" == ".jpeg" or notice.file.url|slice:"-4:" == ".gif" or notice.file.url|slice:"-5:" == ".webp" %}
+                        <!-- 이미지 파일 -->
+                        <img src="{{ notice.file.url }}" alt="첨부 이미지" style="max-width: 100%; border-radius: 8px; margin-top: 8px;">
+                        {% else %}
+                        <!-- 일반 파일 -->
+                        <a href="{{ notice.file.url }}" target="_blank" class="content-link" style="display: inline-flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 20px;">📎</span>
+                            <span>{{ notice.file.name|slice:"8:" }}</span>
+                        </a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% empty %}
+                <div class="empty-state">
+                    <p>아직 공지사항이 없습니다.</p>
                 </div>
                 {% endfor %}
                 
                 {% if is_sessioner %}
                 <div class="notice-form">
-                    <form method="post" action="{% url 'add_notice' session.id %}">
+                    <form method="post" action="{% url 'add_notice' session.id %}" enctype="multipart/form-data" id="noticeForm">
                         {% csrf_token %}
-                        <input type="text" name="title" class="form-input" placeholder="제목 (선택)" required>
+                        <input type="text" name="title" class="form-input" placeholder="제목" required>
                         <textarea name="content" class="form-textarea" placeholder="내용을 입력하세요..." required></textarea>
                         <div class="form-footer">
-                            <label class="file-btn">
-                                ➕
+                            <label class="file-btn" for="noticeFile" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                                ➕ <span id="noticeFileName" style="font-size: 14px; color: #6b7280;"></span>
                             </label>
+                            <input type="file" name="file" id="noticeFile" style="display: none;">
                             <button type="submit" class="submit-btn">전송</button>
                         </div>
                     </form>
@@ -777,17 +921,16 @@
     </div>
     
     <script>
-        // 탭 전환
+        const currentTab = '{{ current_tab }}';
+        
+        // 탭 전환 (URL 업데이트 포함)
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                // 모든 탭 비활성화
-                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-                
-                // 선택한 탭 활성화
-                tab.classList.add('active');
                 const tabName = tab.dataset.tab;
-                document.getElementById(`${tabName}-content`).classList.add('active');
+                const isSessioner = {{ is_sessioner|yesno:"true,false" }};
+                const sessionId = {{ session.id }};
+                const urlPrefix = isSessioner ? '/sessioner' : '/participant';
+                window.location.href = `${urlPrefix}/${sessionId}/?tab=${tabName}`;
             });
         });
         
@@ -810,6 +953,7 @@
         {% if not is_sessioner %}
         document.querySelectorAll('.emotion-btn').forEach(btn => {
             btn.addEventListener('click', async () => {
+                const boxId = btn.dataset.boxId;
                 const emotion = btn.dataset.emotion;
                 
                 try {
@@ -817,34 +961,90 @@
                     formData.append('emotion', emotion);
                     formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
                     
-                    const response = await fetch('{% url "add_progress_check" session.id %}', {
+                    const response = await fetch(`/progress-check/${boxId}/add/`, {
                         method: 'POST',
                         body: formData
                     });
                     
                     if (response.ok) {
-                        // 버튼 활성화 표시
-                        document.querySelectorAll('.emotion-btn').forEach(b => {
+                        const data = await response.json();
+                        
+                        // 같은 진도 박스의 다른 버튼 비활성화
+                        const parentBox = btn.closest('.progress-check');
+                        parentBox.querySelectorAll('.emotion-btn').forEach(b => {
                             b.classList.remove('active-happy', 'active-sad');
                         });
+                        
+                        // 현재 버튼 활성화
                         btn.classList.add(`active-${emotion}`);
+                        
+                        // 피드백 표시
+                        btn.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            btn.style.transform = 'scale(1)';
+                        }, 200);
                     }
                 } catch (error) {
                     console.error('Error:', error);
+                    alert('진도 체크 중 오류가 발생했습니다.');
                 }
             });
         });
+        
+        // Q&A 파일 선택 처리
+        const imageInput = document.getElementById('imageInput');
+        const questionInput = document.getElementById('questionInput');
+        let selectedFile = null;
+        
+        if (imageInput && questionInput) {
+            imageInput.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    selectedFile = e.target.files[0];
+                    const fileName = selectedFile.name;
+                    
+                    // 파일명 표시 (placeholder에 표시)
+                    const originalPlaceholder = questionInput.placeholder;
+                    questionInput.setAttribute('data-original-placeholder', originalPlaceholder);
+                    questionInput.placeholder = `📎 ${fileName} 첨부됨`;
+                    questionInput.style.color = '#6b7280';
+                }
+            });
+            
+            // 입력창에 포커스시 원래 placeholder 복원
+            questionInput.addEventListener('focus', () => {
+                const originalPlaceholder = questionInput.getAttribute('data-original-placeholder');
+                if (originalPlaceholder && !questionInput.value) {
+                    questionInput.placeholder = originalPlaceholder;
+                }
+            });
+            
+            // 입력창에서 포커스 벗어날 때 파일명 다시 표시
+            questionInput.addEventListener('blur', () => {
+                if (selectedFile && !questionInput.value) {
+                    questionInput.placeholder = `📎 ${selectedFile.name} 첨부됨`;
+                }
+            });
+        }
         {% endif %}
         
-        // 답변 폼 표시 (세션자)
+        // 세션자 기능
         {% if is_sessioner %}
-        function showReplyForm(questionId) {
+        // 답변 폼 토글
+        function toggleReplyForm(questionId) {
             const form = document.getElementById(`reply-form-${questionId}`);
             if (form) {
-                form.style.display = 'block';
+                if (form.style.display === 'none') {
+                    form.style.display = 'block';
+                    // 입력 필드에 포커스
+                    const input = form.querySelector('input[name="reply"]');
+                    if (input) input.focus();
+                } else {
+                    form.style.display = 'none';
+                }
             }
         }
         
+        // 답변 완료 상태 토글
         async function toggleAnswered(questionId) {
             try {
                 const formData = new FormData();
@@ -856,11 +1056,68 @@
                 });
                 
                 if (response.ok) {
-                    location.reload();
+                    const data = await response.json();
+                    const btn = document.getElementById(`status-btn-${questionId}`);
+                    const icon = document.getElementById(`status-icon-${questionId}`);
+                    
+                    // 아이콘 변경
+                    if (data.answered) {
+                        btn.classList.add('answered');
+                        icon.innerHTML = '<polyline points="20 6 9 17 4 12"></polyline>';
+                    } else {
+                        btn.classList.remove('answered');
+                        icon.innerHTML = '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>';
+                    }
                 }
             } catch (error) {
                 console.error('Error:', error);
+                alert('상태 변경 중 오류가 발생했습니다.');
             }
+        }
+        
+        // Contents 파일 선택 처리
+        const contentFile = document.getElementById('contentFile');
+        const contentInput = document.getElementById('contentInput');
+        let selectedContentFile = null;
+        
+        if (contentFile && contentInput) {
+            contentFile.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    selectedContentFile = e.target.files[0];
+                    const fileName = selectedContentFile.name;
+                    
+                    // 파일명 표시
+                    const originalPlaceholder = contentInput.placeholder;
+                    contentInput.setAttribute('data-original-placeholder', originalPlaceholder);
+                    contentInput.placeholder = `📎 ${fileName} 첨부됨`;
+                }
+            });
+            
+            contentInput.addEventListener('focus', () => {
+                const originalPlaceholder = contentInput.getAttribute('data-original-placeholder');
+                if (originalPlaceholder && !contentInput.value) {
+                    contentInput.placeholder = originalPlaceholder;
+                }
+            });
+            
+            contentInput.addEventListener('blur', () => {
+                if (selectedContentFile && !contentInput.value) {
+                    contentInput.placeholder = `📎 ${selectedContentFile.name} 첨부됨`;
+                }
+            });
+        }
+        
+        // Notice 파일 선택 처리
+        const noticeFile = document.getElementById('noticeFile');
+        const noticeFileName = document.getElementById('noticeFileName');
+        
+        if (noticeFile && noticeFileName) {
+            noticeFile.addEventListener('change', (e) => {
+                if (e.target.files && e.target.files[0]) {
+                    const fileName = e.target.files[0].name;
+                    noticeFileName.textContent = fileName;
+                }
+            });
         }
         {% endif %}
     </script>

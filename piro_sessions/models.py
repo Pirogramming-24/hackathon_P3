@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
-
 class Session(models.Model):
     title = models.CharField(max_length=100)
     date = models.DateField()
@@ -14,17 +13,42 @@ class Session(models.Model):
     def __str__(self):
         return f"{self.title} ({self.date})"
 
+class ProgressCheckBox(models.Model):
+    """진도 체크 박스 - 세션자가 생성"""
+    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='progress_boxes')
+    content = models.CharField(max_length=200)
+    order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['order', 'created_at']
+    
+    def __str__(self):
+        return f"{self.session.title} - {self.content}"
+    
+    def get_stats(self):
+        """해당 진도의 통계 반환"""
+        happy_count = self.checks.filter(emotion='happy').count()
+        sad_count = self.checks.filter(emotion='sad').count()
+        return {'happy': happy_count, 'sad': sad_count}
+
 class ProgressCheck(models.Model):
+    """사용자별 진도 체크"""
     EMOTION_CHOICES = [
         ('happy', '😊'),
         ('sad', '😢'),
     ]
-    session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='progress_checks')
+    progress_box = models.ForeignKey(ProgressCheckBox, on_delete=models.CASCADE, related_name='checks')
+    user_id = models.CharField(max_length=100)
     emotion = models.CharField(max_length=10, choices=EMOTION_CHOICES)
     created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ['progress_box', 'user_id']
     
     def __str__(self):
-        return f"{self.session.title} - {self.get_emotion_display()}"
+        return f"{self.progress_box.content} - {self.user_id} - {self.get_emotion_display()}"
 
 class Question(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='questions')
@@ -64,6 +88,7 @@ class Notice(models.Model):
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='notices')
     title = models.CharField(max_length=200)
     content = models.TextField()
+    file = models.FileField(upload_to='notices/', blank=True, null=True)  # 파일 필드 추가
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:

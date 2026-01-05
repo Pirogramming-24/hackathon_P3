@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Session, ProgressCheck, Question, Content, Notice
+from .models import Session, ProgressCheck, ProgressCheckBox, Question, Content, Notice
 
 # Register your models here.
 @admin.register(Session)
@@ -8,10 +8,17 @@ class SessionAdmin(admin.ModelAdmin):
     list_filter = ['date']
     search_fields = ['title']
 
+@admin.register(ProgressCheckBox)
+class ProgressCheckBoxAdmin(admin.ModelAdmin):
+    list_display = ['session', 'content', 'order', 'created_at']
+    list_filter = ['session', 'created_at']
+    search_fields = ['content']
+
 @admin.register(ProgressCheck)
 class ProgressCheckAdmin(admin.ModelAdmin):
-    list_display = ['session', 'emotion', 'created_at']
-    list_filter = ['session', 'emotion', 'created_at']
+    list_display = ['progress_box', 'user_id', 'emotion', 'created_at']
+    list_filter = ['progress_box', 'emotion', 'created_at']
+    search_fields = ['user_id']
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
