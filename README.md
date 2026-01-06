@@ -136,7 +136,7 @@ hackathon_P3/
 
 | **초기 화면** |
 | :------: |
-| ![세션] (./assets/images/session.png) |
+| ![세션](./assets/images/session.png) |
 
 <br>
 
