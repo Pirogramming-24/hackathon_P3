@@ -1,0 +1,46 @@
+<!-- templates/components/notice_tab.html -->
+<div class="tab-content {% if current_tab == 'notice' %}active{% endif %}" id="notice-content">
+    <div class="main-content">
+        <div class="notice-list">
+            {% for notice in notices %}
+            <div class="notice-card">
+                <div class="notice-title">{{ notice.title }}</div>
+                <div class="notice-content">{{ notice.content }}</div>
+                {% if notice.file %}
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                    {% if notice.file.url|slice:"-4:" == ".png" or notice.file.url|slice:"-4:" == ".jpg" or notice.file.url|slice:"-5:" == ".jpeg" or notice.file.url|slice:"-4:" == ".gif" or notice.file.url|slice:"-5:" == ".webp" %}
+                    <img src="{{ notice.file.url }}" alt="첨부 이미지" style="max-width: 100%; border-radius: 8px; margin-top: 8px;">
+                    {% else %}
+                    <a href="{{ notice.file.url }}" target="_blank" class="content-link" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 20px;">📎</span>
+                        <span>{{ notice.file.name|slice:"8:" }}</span>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p>아직 공지사항이 없습니다.</p>
+            </div>
+            {% endfor %}
+            
+            {% if is_sessioner %}
+            <div class="notice-form">
+                <form method="post" action="{% url 'notices:add_notice' session.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="title" class="form-input" placeholder="제목" required>
+                    <textarea name="content" class="form-textarea" placeholder="내용을 입력하세요..." required></textarea>
+                    <div class="form-footer">
+                        <label class="file-btn" for="noticeFile" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            ➕ <span id="noticeFileName" style="font-size: 14px; color: #6b7280;"></span>
+                        </label>
+                        <input type="file" name="file" id="noticeFile" style="display: none;">
+                        <button type="submit" class="submit-btn">전송</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<!-- templates/components/qa_tab.html -->
+<div class="tab-content {% if current_tab == 'qa' %}active{% endif %}" id="qa-content">
+    <!-- 진도 체크 박스 -->
+    {% include 'components/progress_check.html' %}
+    
+    <!-- 질문 목록 -->
+    <div class="main-content">
+        <div class="question-list">
+            {% for question in questions %}
+            <div class="question-card" {% if is_sessioner and not question.reply %}onclick="toggleReplyForm({{ question.id }})"{% endif %}>
+                <div class="question-header">
+                    <div class="question-content">
+                        <div class="question-text">
+                            <span class="question-label">Q.</span>
+                            <p class="question-body">{{ question.content }}</p>
+                        </div>
+                        
+                        {% if question.image %}
+                        <img src="{{ question.image.url }}" alt="질문 이미지" class="question-image">
+                        {% endif %}
+                        
+                        {% if question.reply %}
+                        <div class="reply-box">
+                            <div class="reply-label">↳ 답변</div>
+                            <div class="reply-text">{{ question.reply }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if is_sessioner and not question.reply %}
+                        <div class="reply-form" id="reply-form-{{ question.id }}" style="display: none;" onclick="event.stopPropagation();">
+                            <form method="post" action="{% url 'qna:add_reply' question.id %}" style="display: flex; gap: 8px; flex: 1;">
+                                {% csrf_token %}
+                                <input type="text" name="reply" class="reply-input" placeholder="답변을 입력하세요..." required>
+                                <button type="submit" class="reply-submit">전송</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if is_sessioner %}
+                    <button class="status-btn {% if question.answered %}answered{% endif %}" 
+                            id="status-btn-{{ question.id }}"
+                            onclick="event.stopPropagation(); toggleAnswered({{ question.id }})">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="status-icon-{{ question.id }}">
+                            {% if question.answered %}
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                            {% else %}
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                            {% endif %}
+                        </svg>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p>아직 질문이 없습니다.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- 질문 입력 폼 (참여자만) -->
+    {% if not is_sessioner %}
+    <div class="input-form">
+        <form method="post" action="{% url 'qna:add_question' session.id %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center; flex: 1;">
+            {% csrf_token %}
+            <label class="file-btn" for="imageInput" style="cursor: pointer;">📎</label>
+            <input type="file" name="image" id="imageInput" style="display: none;" accept="image/*">
+            <input type="text" name="content" class="input-field" id="questionInput" placeholder="질문을 입력하세요..." required>
+            <button type="submit" class="submit-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>

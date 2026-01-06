@@ -1,0 +1,16 @@
+<!-- templates/components/sidebar.html -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">세션 선택</div>
+    <div class="session-list">
+        {% for s in sessions %}
+        <button class="session-item {% if s.id == session.id %}active{% endif %}" 
+                onclick="location.href='{% if is_sessioner %}/sessioner/{{ s.id }}/?tab={{ current_tab }}{% else %}/participant/{{ s.id }}/?tab={{ current_tab }}{% endif %}'">
+            <div class="session-item-title">{{ s.title }}</div>
+            <div class="session-item-date">{{ s.date }}</div>
+        </button>
+        {% endfor %}
+    </div>
+    <button class="back-btn" onclick="location.href='/'">초기 화면으로</button>
+</aside>

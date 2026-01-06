@@ -22,6 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('piro_sessions.urls')),
+    path('question/', include('qna.urls')),
+    path('content/', include('piro_contents.urls')),
+    path('notice/', include('notices.urls')),
 ]
 
 if settings.DEBUG:

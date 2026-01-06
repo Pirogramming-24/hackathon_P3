@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}피로그래밍 - {{ session.title }}{% endblock %}
+
+{% block content %}
+<body data-is-sessioner="{% if is_sessioner %}true{% else %}false{% endif %}" data-session-id="{{ session.id }}">
+
+<!-- 네비게이션 바 -->
+{% include 'components/navigation.html' %}
+
+<!-- 사이드바 -->
+{% include 'components/sidebar.html' %}
+
+<!-- Q&A 탭 -->
+{% include 'components/qa_tab.html' %}
+
+<!-- Contents 탭 -->
+{% include 'components/contents_tab.html' %}
+
+<!-- Notice 탭 -->
+{% include 'components/notice_tab.html' %}
+
+</body>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/main.js' %}"></script>
+{% if is_sessioner %}
+<script src="{% static 'js/sessioner.js' %}"></script>
+{% else %}
+<script src="{% static 'js/participant.js' %}"></script>
+{% endif %}
+{% endblock %}
