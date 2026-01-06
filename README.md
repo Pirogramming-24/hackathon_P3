@@ -14,7 +14,7 @@
   
 | **서비스 로고** | **메인 화면** |
 | :------: |  :------: |
-| ./assets/images/logo.png | 🖥️ |
+| ![메인 화면](./assets/images/logo.png) | 🖥️ |
 
 </div>
 
