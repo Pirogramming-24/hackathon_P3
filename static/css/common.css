@@ -1,0 +1,52 @@
+
+.file-btn {
+    background: none;
+    border: none;
+    padding: 0px;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+.file-btn i{
+    font-size: 30px;
+}
+
+.file-btn:hover {
+    background-color: #fff;
+    transform:rotate(45deg);
+}
+
+.input-field {
+    border:none; outline:none; background: transparent; box-shadow: none; 
+    flex: 1;
+    padding: 0px 16px;
+    margin: 0;
+    font-size: 18px;
+}
+
+.input-field:focus {
+    border:none; outline:none; background: transparent; box-shadow: none; 
+
+}
+.input-form:focus-within {
+    border-color: #00462A;
+}
+
+.submit-btn {
+    background-color: #00462A;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 25px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-btn:hover {
+    background: #099e0f;
+}
+
