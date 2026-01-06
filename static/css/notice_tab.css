@@ -88,7 +88,7 @@
     background-color: #fdfdfd;
 }
 
-/* 입력 필드 스타일 */
+/* 입력 필드 스타일 
 .form-input,
 .form-textarea {
     width: 100%;
@@ -100,7 +100,7 @@
     background-color: #fff;
     margin-bottom: 10px;
     box-sizing: border-box;
-    /* 패딩 포함 크기 계산 */
+    /* 패딩 포함 크기 계산 
     font-family: inherit;
 }
 
@@ -116,7 +116,7 @@
     resize: vertical;
 }
 
-/* 폼 하단 영역 */
+/* 폼 하단 영역 
 .form-footer {
     display: flex;
     justify-content: space-between;
@@ -124,7 +124,7 @@
     margin-top: 8px;
 }
 
-/* 파일 첨부 버튼 (라벨) */
+/* 파일 첨부 버튼 (라벨) 
 .file-btn {
     color: #4b5563;
     font-size: 0.9rem;
@@ -140,7 +140,7 @@
     color: #0cbd12;
 }
 
-/* 전송/수정완료 버튼 */
+/* 전송/수정완료 버튼 
 .submit-btn {
     background-color: #0cbd12;
     color: white;
@@ -157,12 +157,11 @@
     background-color: #099e0f;
 }
 
-/* --- 빈 상태 메시지 --- */
-.empty-state {
+/* --- 빈 상태 메시지 --- 
     text-align: center;
     padding: 40px;
     background-color: #f9fafb;
     border-radius: 12px;
     color: #888;
     border: 1px dashed #e5e7eb;
-}
+}*/
