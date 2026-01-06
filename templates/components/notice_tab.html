@@ -23,11 +23,11 @@
                 {% if is_sessioner %}
                 <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; justify-content: flex-end;">
                     <button onclick="showEditForm({{ notice.id }}, '{{ notice.title }}', '{{ notice.content|escapejs }}')" 
-                            style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                            style="padding: 8px 16px; background: #e2eeff; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
                         수정
                     </button>
                     <button onclick="deleteNotice({{ notice.id }})" 
-                            style="padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                            style="padding: 8px 16px; background: #fde7e7; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
                         삭제
                     </button>
                 </div>

@@ -1,0 +1,168 @@
+/* notice_tab.css */
+
+/* --- 레이아웃 및 애니메이션 --- */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+    padding: 20px 0;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.notice-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+/* --- 공지사항 카드 --- */
+.notice-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    /* 둥근 모서리 */
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-left: 0px solid #0cbd12;
+    /* 포인트 컬러 */
+    position: relative;
+}
+
+.notice-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 12px;
+}
+
+.notice-content {
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* 파일 첨부 링크 스타일 */
+.content-link {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.content-link:hover {
+    color: #0cbd12;
+    text-decoration: underline;
+}
+
+/* --- [중요] 폼 스타일 (HTML의 class="notice-form"과 매칭) --- */
+.notice-form {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 수정 폼일 경우의 스타일 (ID로 구분) */
+#editNoticeForm {
+    border: 2px solid #0cbd12;
+    /* 수정 모드 강조 */
+    background-color: #fdfdfd;
+}
+
+/* 입력 필드 스타일 */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #222;
+    background-color: #fff;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    /* 패딩 포함 크기 계산 */
+    font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #0cbd12;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+}
+
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* 폼 하단 영역 */
+.form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+/* 파일 첨부 버튼 (라벨) */
+.file-btn {
+    color: #4b5563;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.file-btn:hover {
+    color: #0cbd12;
+}
+
+/* 전송/수정완료 버튼 */
+.submit-btn {
+    background-color: #0cbd12;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 0.9rem;
+}
+
+.submit-btn:hover {
+    background-color: #099e0f;
+}
+
+/* --- 빈 상태 메시지 --- */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    color: #888;
+    border: 1px dashed #e5e7eb;
+}
