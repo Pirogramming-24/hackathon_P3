@@ -2,6 +2,10 @@
 {% load static %}
 
 {% block title %}피로그래밍 - {{ session.title }}{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/tab-content.css' %}">
+{% endblock %}
+
 
 {% block content %}
 <body data-is-sessioner="{% if is_sessioner %}true{% else %}false{% endif %}" data-session-id="{{ session.id }}">
