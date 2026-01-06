@@ -95,3 +95,50 @@ if (noticeFile && noticeFileName) {
         }
     });
 }
+
+// 수정 폼 표시
+function showEditForm(noticeId, title, content) {
+    // 새 공지사항 폼 숨기기
+    document.getElementById('addNoticeForm').style.display = 'none';
+    
+    // 수정 폼 표시
+    const editForm = document.getElementById('editNoticeForm');
+    editForm.style.display = 'block';
+    
+    // 폼 action URL 설정
+    document.getElementById('editForm').action = `/notice/${noticeId}/edit/`;
+    
+    // 기존 값 채우기
+    document.getElementById('editTitle').value = title;
+    document.getElementById('editContent').value = content;
+    
+    // 스크롤 이동
+    editForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// 수정 취소
+function cancelEdit() {
+    // 수정 폼 숨기기
+    document.getElementById('editNoticeForm').style.display = 'none';
+    
+    // 새 공지사항 폼 표시
+    document.getElementById('addNoticeForm').style.display = 'block';
+}
+
+// 공지사항 삭제
+function deleteNotice(noticeId) {
+    if (confirm('정말 이 공지사항을 삭제하시겠습니까?')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/notice/${noticeId}/delete/`;
+        
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = 'csrfmiddlewaretoken';
+        csrfToken.value = CSRF_TOKEN;
+        
+        form.appendChild(csrfToken);
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
