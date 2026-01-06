@@ -4,7 +4,11 @@ from utils.file_upload import safe_file_upload_path
 # Create your models here.
 class Session(models.Model):
     """세션 기본 정보"""
-    file = models.FileField(upload_to=safe_file_upload_path)
+    file = models.FileField(
+        upload_to=safe_file_upload_path,
+        blank=True,
+        null=True
+    )
 
     title = models.CharField(max_length=100, verbose_name="세션 제목")
     date = models.DateField(verbose_name="세션 날짜")
