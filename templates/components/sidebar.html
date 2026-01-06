@@ -1,0 +1,44 @@
+<!-- templates/components/sidebar.html -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-title">세션 선택</div>
+    <div class="session-list">
+        {% for s in sessions %}
+            {# 각 주차별 시작 지점에서 그룹 열기 #}
+            {% if forloop.counter0 == 0 %} {# 2025.12.23 시작 #}
+                <details class="week-group" name="weeks">
+                    <summary class="week-title">1주차</summary>
+                    <div class="week-content">
+            {% elif forloop.counter0 == 5 %} {# 2025.12.30 시작 #}
+                <details class="week-group" name="weeks">
+                    <summary class="week-title">2주차</summary>
+                    <div class="week-content">
+            {% elif forloop.counter0 == 11 %} {# 2026.01.06 시작 #}
+                <details class="week-group" name="weeks">
+                    <summary class="week-title">3주차</summary>
+                    <div class="week-content">
+            {% elif forloop.counter0 == 16 %} {# 2026.01.13 시작 #}
+                <details class="week-group" name="weeks">
+                    <summary class="week-title">4주차</summary>
+                    <div class="week-content">
+            {% elif forloop.counter0 == 21 %} {# 2026.01.20 시작 #}
+                <details class="week-group" name="weeks">
+                    <summary class="week-title">5주차</summary>
+                    <div class="week-content">
+            {% endif %}
+
+            <button class="session-item {% if s.id == session.id %}active{% endif %}" 
+                    onclick="location.href='{% if is_sessioner %}/sessioner/{{ s.id }}/?tab={{ current_tab }}{% else %}/participant/{{ s.id }}/?tab={{ current_tab }}{% endif %}'">
+                <div class="session-item-title">{{ s.title }}</div>
+                <div class="session-item-date">{{ s.date }}</div>
+            </button>
+
+            {% if forloop.counter == 5 or forloop.counter == 11 or forloop.counter == 16 or forloop.counter == 21 or forloop.last %}
+                    </div>
+                </details>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <button class="back-btn" onclick="location.href='/'">초기 화면으로</button>
+</aside>

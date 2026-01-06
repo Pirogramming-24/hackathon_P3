@@ -1,0 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+                 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    background: #ffffff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ===== 메인 콘텐츠 ===== */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 0;
+    margin:0px 0px;
+    width:100%;
+    
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    width:700px;
+    margin:0 auto;
+}
+
+@media (max-width: 768px) {
+  
+    .tab-content.active {
+        display: block;
+        width:450px;
+        margin:0 auto;
+    }
+}

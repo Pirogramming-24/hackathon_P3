@@ -1,0 +1,121 @@
+/* --- 입력 폼 (하단 캡슐 모양) --- */
+.input-form {
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    border-radius: 50px;
+    padding: 8px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    bottom:30px;
+}
+
+/* 수정 모드일 때 강조 */
+.input-form.edit-mode {
+    border: none;outline: none;box-shadow: none;
+    background-color: #eff6ff;
+    border-radius: 12px;
+    /* 수정 모드는 조금 더 네모나게 */
+}
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #00462A;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+}
+
+.input-form:focus-within {
+    border-color: #00462A;
+}
+.input-field:focus{
+    border-color:#fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+
+}
+
+
+.file-btn {
+    color: #444;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 4px;
+    margin-right: 4px;
+}
+
+.file-btn:hover {
+    transform:rotate(45deg);
+    transform: translateY(-2px);    
+}
+
+.input-field {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    color: #222222;
+    flex: 1;
+}
+
+.input-field::placeholder {
+    color: #999;
+}
+
+.input-form label {
+    font-size: 0.85rem;
+    color: #222;
+    user-select: none;
+    margin-right: 4px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+/* --- 전송 버튼 (동그란 종이비행기) --- */
+.submit-btn {
+    background-color: #00462A;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+.submit-btn:hover {
+    background-color: #099e0f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.submit-btn:active {
+    transform: scale(0.95);
+}
+
+.submit-btn svg {
+    margin-right: 2px;
+    margin-top: 2px;
+}
+
+/* 빈 상태 메시지 */
+.empty-state {
+    text-align: center;
+    padding: 40px 0;
+    color: #888;
+    font-size: 0.95rem;
+    background: #fcfcfc;
+    border-radius: 12px;
+    border: 1px dashed #e5e7eb;
+}

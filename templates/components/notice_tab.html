@@ -1,0 +1,82 @@
+<!-- templates/components/notice_tab.html -->
+<div class="tab-content {% if current_tab == 'notice' %}active{% endif %}" id="notice-content">
+    <div class="main-content">
+        <div class="notice-list">
+            {% for notice in notices %}
+            <div class="notice-card">
+                <div class="notice-title">{{ notice.title }}</div>
+                <div class="notice-content">{{ notice.content }}</div>
+                {% if notice.file %}
+                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                    {% if notice.file.url|slice:"-4:" == ".png" or notice.file.url|slice:"-4:" == ".jpg" or notice.file.url|slice:"-5:" == ".jpeg" or notice.file.url|slice:"-4:" == ".gif" or notice.file.url|slice:"-5:" == ".webp" %}
+                    <img src="{{ notice.file.url }}" alt="첨부 이미지" style="max-width: 100%; border-radius: 8px; margin-top: 8px;">
+                    {% else %}
+                    <a href="{{ notice.file.url }}" target="_blank" class="content-link" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 20px;">📎</span>
+                        <span>{{ notice.file.name|slice:"8:" }}</span>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                <!-- ===== 추가: 수정/삭제 버튼 (세션자만) ===== -->
+                {% if is_sessioner %}
+                <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #e5e7eb; display: flex; gap: 8px; justify-content: flex-end;">
+                    <button onclick="showEditForm({{ notice.id }}, '{{ notice.title }}', '{{ notice.content|escapejs }}')" 
+                            style="padding: 8px 16px; background: #e2eeff; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                        수정
+                    </button>
+                    <button onclick="deleteNotice({{ notice.id }})" 
+                            style="padding: 8px 16px; background: #fde7e7; color: #333; border: none; border-radius: 6px; cursor: pointer; font-size: 14px;">
+                        삭제
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p>아직 공지사항이 없습니다.</p>
+            </div>
+            {% endfor %}
+            
+            {% if is_sessioner %}
+            <!-- ===== 새 공지사항 작성 폼 ===== -->
+            <div class="notice-form" id="addNoticeForm">
+                <form method="post" action="{% url 'notices:add_notice' session.id %}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="title" class="form-input" placeholder="제목" required>
+                    <textarea name="content" class="form-textarea" placeholder="내용을 입력하세요..." required></textarea>
+                    <div class="form-footer">
+                        <label class="file-btn" for="noticeFile" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            <i class="bi bi-plus"></i><span id="noticeFileName" style="font-size: 14px; color: #6b7280;"></span>
+                        </label>
+                        <input type="file" name="file" id="noticeFile" style="display: none;">
+                        <button type="submit" class="submit-btn"><i class="bi bi-arrow-up-short"></i></button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- ===== 추가: 공지사항 수정 폼 (숨김 상태) ===== -->
+            <div class="notice-form" id="editNoticeForm" style="display: none;">
+                <form method="post" action="" id="editForm" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="text" name="title" id="editTitle" class="form-input" placeholder="제목" required>
+                    <textarea name="content" id="editContent" class="form-textarea" placeholder="내용을 입력하세요..." required></textarea>
+                    <div class="form-footer">
+                        <label class="file-btn" for="editNoticeFile" style="cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            ➕ <span id="editNoticeFileName" style="font-size: 14px; color: #6b7280;"></span>
+                        </label>
+                        <input type="file" name="file" id="editNoticeFile" style="display: none;">
+                        <div style="display: flex; gap: 8px;">
+                            <button type="button" onclick="cancelEdit()" style="padding: 12px 20px; background: #6b7280; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: 500;">
+                                취소
+                            </button>
+                            <button type="submit" class="submit-btn">수정 완료</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

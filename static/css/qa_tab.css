@@ -1,0 +1,209 @@
+
+/* ===== Q&A 스타일 ===== */
+.question-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width:100%;
+    margin-bottom: 20px;
+}
+
+.question-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.question-card:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.question-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.question-content {
+    flex: 1;
+}
+
+.question-text {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.question-label {
+    font-weight: 700;
+    font-size: larger;
+    color: #00462A;
+}
+
+.question-body {
+    color: #111827;
+    line-height: 1.6;
+}
+
+.question-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 12px;
+}
+
+.reply-box {
+    margin-left: 24px;
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    display:flex; 
+    justify-content: flex-start;
+}
+
+.reply-label {
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+.reply-label i{
+    margin-right:7px;
+    color: #374151;
+
+}
+.reply-text {
+    color: #374151;
+    line-height: 1.6;
+}
+
+.reply-form {
+    margin-left: 24px;
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+}
+
+.reply-input {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.reply-input:focus {
+    outline: none;
+    border-color: #00462A;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.reply-submit {
+    padding: 10px 20px;
+    background: #00462A;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.reply-submit:hover {
+    background: #00462A;
+}
+
+.status-btn {
+    background: #f3f4f6;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+}
+
+.status-btn:hover {
+    background: #e5e7eb;
+    transform: scale(1.1);
+}
+
+.status-btn.answered {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.status-btn.answered:hover {
+    background: #bfdbfe;
+}
+
+.status-btn svg {
+    stroke-width: 2.5;
+}
+
+/* ===== 입력 폼 ===== 
+.input-form {
+    position: sticky;
+    bottom: 0;
+    background: white;
+    border-top: 1px solid #e5e7eb;
+    padding: 16px 20px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.file-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background 0.2s;
+    font-size: 20px;
+}
+
+.file-btn:hover {
+    background: #f3f4f6;
+}
+
+.input-field {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.input-field:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.submit-btn {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submit-btn:hover {
+    background: #4338ca;
+}
+*/

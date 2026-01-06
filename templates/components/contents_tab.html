@@ -1,0 +1,62 @@
+<!-- templates/components/contents_tab.html -->
+<div class="tab-content {% if current_tab == 'contents' %}active{% endif %}" id="contents-content">
+    <!-- 진도 체크 박스 -->
+    {% include 'components/progress_check.html' %}
+    
+    <!-- 콘텐츠 목록 -->
+    <div class="main-content">
+        <div class="content-list">
+            {% for content in contents %}
+            <div class="content-card">
+                <div class="content-icon {{ content.content_type }}">
+                    {% if content.content_type == 'link' %}🔗
+                    {% elif content.content_type == 'file' %}📄
+                    {% elif content.content_type == 'image' %}🖼️
+                    {% else %}📝{% endif %}
+                </div>
+                <div class="content-body">
+                    {% if content.title %}<strong>{{ content.title }}</strong><br>{% endif %}
+                    {% if content.content_type == 'link' %}
+                    <a href="{{ content.content }}" target="_blank" class="content-link">{{ content.content }}</a>
+                    {% elif content.content_type == 'image' %}
+                    {{ content.content }}
+                    <br><img src="{{ content.file.url }}" alt="업로드 이미지" class="content-image">
+                    {% elif content.content_type == 'file' %}
+                    {{ content.content }}
+                    <br><a href="{{ content.file.url }}" target="_blank" class="content-link">📎 파일 다운로드</a>
+                    {% else %}
+                    {{ content.content }}
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <div class="empty-state">
+                <p>아직 업로드된 콘텐츠가 없습니다.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- 콘텐츠 입력 폼 (세션자만) -->
+    {% if is_sessioner %}
+    <div class="input-form">
+        <form method="post" action="{% url 'piro_contents:add_content' session.id %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center; flex: 1;">
+            {% csrf_token %}
+            <label class="file-btn" for="contentFile" style="cursor: pointer;"><i class="bi bi-plus"></i></label>
+            <input type="file" name="file" id="contentFile" style="display: none;">
+            <label style="display: flex; align-items: center; gap: 4px; font-size: 14px; cursor: pointer;">
+                <input type="checkbox" name="is_progress" value="true">진도
+            </label>
+            <input type="text" name="content" class="input-field" id="contentInput" placeholder="내용을 입력하세요..." required>
+            <button type="submit" class="submit-btn">
+                <!--
+                <svg width="20" height="20" viewBox="0 0 25 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>-->
+                <i class="bi bi-arrow-up-short"></i>
+            </button>
+        </form>
+    </div>
+    {% endif %}
+</div>
