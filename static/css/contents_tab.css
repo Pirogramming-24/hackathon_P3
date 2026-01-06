@@ -148,7 +148,7 @@
     color: #b91c1c;
 }
 
-/* --- 입력 폼 (하단 캡슐 모양) --- */
+/* --- 입력 폼 (하단 캡슐 모양) --- 
 .input-form {
     background-color: #ffffff;
     border: 1px solid #d1d5db;
@@ -160,12 +160,12 @@
     align-items: center;
 }
 
-/* 수정 모드일 때 강조 */
+/* 수정 모드일 때 강조 
 .input-form.edit-mode {
     border-color: #3b82f6;
     background-color: #eff6ff;
     border-radius: 12px;
-    /* 수정 모드는 조금 더 네모나게 */
+    /* 수정 모드는 조금 더 네모나게 
 }
 
 .input-form:focus-within {
@@ -211,7 +211,7 @@
     cursor: pointer;
 }
 
-/* --- 전송 버튼 (동그란 종이비행기) --- */
+/* --- 전송 버튼 (동그란 종이비행기) --- 
 .submit-btn {
     background-color: #0cbd12;
     color: white;
@@ -244,7 +244,7 @@
     margin-top: 2px;
 }
 
-/* 빈 상태 메시지 */
+/* 빈 상태 메시지 
 .empty-state {
     text-align: center;
     padding: 40px 0;
@@ -253,4 +253,4 @@
     background: #fcfcfc;
     border-radius: 12px;
     border: 1px dashed #e5e7eb;
-}
+}*/

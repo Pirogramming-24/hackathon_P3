@@ -5,20 +5,20 @@
     <div class="progress-controls">
         {% if is_sessioner %}
             <div class="emotion-stat">
-                <span style="font-size: 24px;">😊</span>
+                <span style="font-size: 24px;"><i class="bi bi-emoji-smile"></i></span>
                 <span class="stat-number happy">{{ item.stats.happy }}</span>
             </div>
             <div class="emotion-stat">
-                <span style="font-size: 24px;">😢</span>
+                <span style="font-size: 24px;"><i class="bi bi-emoji-frown"></i></span>
                 <span class="stat-number sad">{{ item.stats.sad }}</span>
             </div>
         {% else %}
             <button class="emotion-btn {% if item.user_emotion == 'happy' %}active-happy{% endif %}" 
                     data-box-id="{{ item.box.id }}" 
-                    data-emotion="happy">😊</button>
+                    data-emotion="happy"><i class="bi bi-emoji-smile"></i></button>
             <button class="emotion-btn {% if item.user_emotion == 'sad' %}active-sad{% endif %}" 
                     data-box-id="{{ item.box.id }}" 
-                    data-emotion="sad">😢</button>
+                    data-emotion="sad"><i class="bi bi-emoji-frown"></i></button>
         {% endif %}
     </div>
 </div>
