@@ -8,6 +8,7 @@
     margin-top: 20px;
     display: flex;
     align-items: center;
+    bottom:30px;
 }
 
 /* 수정 모드일 때 강조 */
@@ -23,7 +24,6 @@
 }
 
 .file-btn {
-    font-size: 50px;
     color: #444;
     cursor: pointer;
     transition: color 0.2s;
