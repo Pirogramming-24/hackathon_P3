@@ -40,8 +40,9 @@
 }
 
 .question-label {
-    font-weight: 600;
-    color: #374151;
+    font-weight: 700;
+    font-size: larger;
+    color: #00462A;
 }
 
 .question-body {
@@ -96,13 +97,13 @@
 
 .reply-input:focus {
     outline: none;
-    border-color: #3b82f6;
+    border-color: #00462A;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .reply-submit {
     padding: 10px 20px;
-    background: #3b82f6;
+    background: #00462A;
     color: white;
     border: none;
     border-radius: 8px;
@@ -112,7 +113,7 @@
 }
 
 .reply-submit:hover {
-    background: #2563eb;
+    background: #00462A;
 }
 
 .status-btn {

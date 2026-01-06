@@ -38,7 +38,6 @@
     /* 둥근 모서리 */
     padding: 24px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    border-left: 0px solid #0cbd12;
     /* 포인트 컬러 */
     position: relative;
 }

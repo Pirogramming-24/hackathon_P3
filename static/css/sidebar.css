@@ -1,7 +1,7 @@
 /* ===== 사이드바 ===== */
 .sidebar-overlay {
     display: none;
-    position: fixed;
+    position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 40;
@@ -12,7 +12,7 @@
 }
 
 .sidebar {
-    position: fixed;
+    position: absolute;
     left: -320px;
     top: 0;
     bottom: 0;
@@ -24,6 +24,7 @@
     transition: left 0.3s;
 }
 
+
 .sidebar.show {
     left: 0;
 }
@@ -32,6 +33,7 @@
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 16px;
+    margin-top: 60px;
 }
 
 .session-list {
@@ -40,9 +42,10 @@
     gap: 8px;
     margin-bottom: 24px;
     /* 전체 리스트 높이를 고정하고 내부에서만 스크롤이 발생하도록 설정 */
-    height: calc(100vh - 200px); 
+    height: calc(100vh - 200px);
     overflow-y: auto;
-    overflow-x: hidden; /* 가로 크기 변화 방지 */
+    overflow-x: hidden;
+    /* 가로 크기 변화 방지 */
 }
 
 .week-group[open] .week-content {
@@ -50,8 +53,15 @@
 }
 
 @keyframes slideDown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 주차 그룹 스타일 */
@@ -62,13 +72,17 @@
     background: white;
     overflow: hidden;
     /* ★ 핵심: 내용이 많아져도 버튼 자체가 찌그러지지 않도록 고정 */
-    flex-shrink: 0; 
+    flex-shrink: 0;
+}
+
+.week-group:nth-child(1) {
+    margin-top: 8px;
 }
 
 /* 주차 제목 (클릭하는 부분) */
 .week-title {
     /* 높이를 명시적으로 주어 다른 요소의 영향을 최소화함 */
-    height: 48px; 
+    height: 48px;
     padding: 0 16px;
     display: flex;
     align-items: center;
@@ -103,19 +117,22 @@
 .session-item {
     /* 버튼 너비를 100%로 고정 */
     width: 100%;
-    min-height: 50px; /* 세션 버튼 높이도 최소치 고정 */
+    min-height: 50px;
+    /* 세션 버튼 높이도 최소치 고정 */
     flex-shrink: 0;
 }
 
 .session-item.active {
     /* 1. 배경 색상 변경 */
-    background-color: #EBF4E8; /* 아주 연한 초록색 배경 (원하는 색으로 변경) */
-    
+    background-color: #EBF4E8;
+    /* 아주 연한 초록색 배경 (원하는 색으로 변경) */
+
     color: black;
 
     /* 3. 테두리 색상 및 두께 변경 */
-    border: 1px solid #69CE4E; /* 초록색 테두리 */
-    
+    border: 1px solid #69CE4E;
+    /* 초록색 테두리 */
+
     /* 강조를 위해 폰트 두께 조절 */
     font-weight: 600;
 }

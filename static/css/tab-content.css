@@ -33,3 +33,12 @@ body {
     width:700px;
     margin:0 auto;
 }
+
+@media (max-width: 768px) {
+  
+    .tab-content.active {
+        display: block;
+        width:450px;
+        margin:0 auto;
+    }
+}
