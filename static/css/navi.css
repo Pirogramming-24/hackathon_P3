@@ -6,13 +6,17 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    position: relative;
+    position: sticky;
+    top: 0px; /* 꼭 추가해야 함! */
+    z-index: 1000;
 }
 
 .navbar-left {
+    flex:0 1 auto;
     display: flex;
     align-items: center;
     gap: 16px;
+    white-space: nowrap;
 }
 
 .menu-btn {
@@ -63,14 +67,15 @@
 
 .logo img{
     height: 28px;
-    width: auto;
+    /*width: auto;
     display: block;
-}
+*/}
 
 .tabs {
     display: flex;
+    flex:1;
+    justify-content: center;
     gap: 4px;
-    position: absolute;
     left: 50%;
     transform: translateX(-50%);
 

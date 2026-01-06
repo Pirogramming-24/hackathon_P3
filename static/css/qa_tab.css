@@ -1,21 +1,4 @@
 
-/* ===== 메인 콘텐츠 ===== */
-.main-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px;
-    width:60%;
-    margin:0 auto;
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
 /* ===== Q&A 스타일 ===== */
 .question-list {
     display: flex;
@@ -76,17 +59,20 @@
     margin-left: 24px;
     margin-top: 12px;
     padding: 12px 16px;
-    background: #eff6ff;
+    background: #f5f5f5;
     border-radius: 8px;
+    display:flex; 
+    justify-content: flex-start;
 }
 
 .reply-label {
-    color: #2563eb;
     font-weight: 500;
     margin-bottom: 4px;
 }
 .reply-label i{
-    margin-right:5px;
+    margin-right:7px;
+    color: #374151;
+
 }
 .reply-text {
     color: #374151;
