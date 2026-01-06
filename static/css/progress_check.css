@@ -1,0 +1,63 @@
+
+/* ===== 진도 체크 박스 ===== */
+.progress-check {
+    background: #fff;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.progress-controls {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.emotion-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 24px;
+}
+
+.emotion-btn:hover {
+    background: #f3f4f6;
+    transform: scale(1.1);
+}
+
+.emotion-btn.active-happy {
+    background: #dcfce7;
+}
+
+.emotion-btn.active-sad {
+    background: #fee2e2;
+}
+
+.emotion-stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stat-number {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.stat-number.happy {
+    color: #16a34a;
+}
+
+.stat-number.sad {
+    color: #dc2626;
+}
