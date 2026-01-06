@@ -14,7 +14,7 @@
   
 | **서비스 로고** | **메인 화면** |
 | :------: |  :------: |
-| ![로고](./assets/images/logo.png) | 🖥️ |
+| ![로고](./assets/images/logo.png) | ![세션] (./assets/images/session.png) |
 
 </div>
 
@@ -136,7 +136,7 @@ hackathon_P3/
 
 | **초기 화면** |
 | :------: |
-| 📸 스크린샷 |
+| ![세션] (./assets/images/session.png) |
 
 <br>
 
@@ -146,7 +146,7 @@ hackathon_P3/
 
 | **참여자 Q&A** | **세션자 Q&A** |
 | :------: | :------: |
-| 📸 스크린샷 | 📸 스크린샷 |
+| ![참여자 Q&A](./assets/images/Q&A.png) | 📸 스크린샷 |
 
 <br>
 
@@ -156,7 +156,7 @@ hackathon_P3/
 
 | **참여자 Contents** | **세션자 Contents** |
 | :------: | :------: |
-| 📸 스크린샷 | 📸 스크린샷 |
+| ![참여자_contents](./assets/images/contents.png) | 📸 스크린샷 |
 
 <br>
 
@@ -166,7 +166,7 @@ hackathon_P3/
 
 | **참여자 Notice** | **세션자 Notice** |
 | :------: | :------: |
-| 📸 스크린샷 | 📸 스크린샷 |
+| ![참여자_notice](./assets/images/notice.png) | 📸 스크린샷 |
 
 <br>
 
