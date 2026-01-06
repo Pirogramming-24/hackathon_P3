@@ -1,0 +1,5 @@
+# __pycache__ 디렉터리 무시
+__pycache__/
+
+# 컴파일된 python 파일 무시 (.pyc)
+*.pyc
