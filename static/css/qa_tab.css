@@ -1,10 +1,9 @@
-
 /* ===== Q&A 스타일 ===== */
 .question-list {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    width:100%;
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -62,7 +61,7 @@
     padding: 12px 16px;
     background: #f5f5f5;
     border-radius: 8px;
-    display:flex; 
+    display: flex;
     justify-content: flex-start;
 }
 
@@ -70,11 +69,13 @@
     font-weight: 500;
     margin-bottom: 4px;
 }
-.reply-label i{
-    margin-right:7px;
+
+.reply-label i {
+    margin-right: 7px;
     color: #374151;
 
 }
+
 .reply-text {
     color: #374151;
     line-height: 1.6;
@@ -146,6 +147,13 @@
 
 .status-btn svg {
     stroke-width: 2.5;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #0cbd12;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
 }
 
 /* ===== 입력 폼 ===== 

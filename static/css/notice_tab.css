@@ -87,6 +87,14 @@
     background-color: #fdfdfd;
 }
 
+.form-input .text :focus,
+.form-textarea:focus {
+    border-color: #0cbd12;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+}
+
+
 /* 입력 필드 스타일 
 .form-input,
 .form-textarea {
