@@ -14,7 +14,7 @@
   
 | **서비스 로고** | **메인 화면** |
 | :------: |  :------: |
-| ![로고](./assets/images/logo.png) | ![세션](./assets/images/session.png) |
+| ![로고](./assets/images/logo.png) | ![세션](./assets/images/main.png) |
 
 </div>
 
@@ -136,7 +136,7 @@ hackathon_P3/
 
 | **초기 화면** |
 | :------: |
-| ![세션](./assets/images/session.png) |
+| ![세션](./assets/images/main.png) |
 
 <br>
 
