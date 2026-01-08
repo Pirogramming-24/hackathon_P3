@@ -20,7 +20,7 @@
 
 <br>
 
-### **배포 URL : [진행중...]**
+### **배포 URL : https://gunkk9.pythonanywhere.com/**
 
 <br>
 <br>
