@@ -12,11 +12,10 @@
 
 <div align="center">
   
+  
 | **서비스 로고** |
 | :------: |
 | ![로고](./assets/images/logo.png) |
-
-<br>
 
 | **메인 화면** |
 | :------: 
