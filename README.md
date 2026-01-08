@@ -12,9 +12,14 @@
 
 <div align="center">
   
-| **서비스 로고** | **메인 화면** |
-| :------: |  :------: |
-| ![로고](./assets/images/logo.png) | ![세션](./assets/images/main.png) |
+  
+| **서비스 로고** |
+| :------: |
+| ![로고](./assets/images/logo.png) |
+
+| **메인 화면** |
+| :------: 
+| ![세션](./assets/images/main.png) |
 
 </div>
 
@@ -101,6 +106,9 @@ hackathon_P3/
 - 세션자: 실시간으로 참여자들의 진도 통계 확인
 - 사용자별 한 번만 체크 가능 (변경 가능)
 - 쿠키 기반 사용자 식별로 로그인 없이 사용 가능
+- 진도체크박스는 Q&A 탭과 Contents 탭에서 모두 확인 가능
+- 세션자가 Contents 탭 입력 영역에서 ‘진도’ 옵션을 선택해 등록 시,
+  상단에 진도 체크 박스가 활성화됨
 
 ### 3. 💬 Q&A 시스템
 - 참여자: 익명으로 질문 작성 (이미지 첨부 가능)
@@ -131,12 +139,12 @@ hackathon_P3/
 # 📱 서비스 화면
 
 ### 초기 화면
-* 세션 날짜를 드롭다운에서 선택합니다.
-* **참여자** 또는 **세션자** 역할을 선택하여 입장합니다.
+* 세션 날짜를 드롭다운에서 선택
+* **참여자** 또는 **세션자** 역할을 선택하여 입장
 
-| **초기 화면** |
-| :------: |
-| ![세션](./assets/images/main.png) |
+| **초기 화면** | **세션 날짜 선택** |
+| :------: | :------: |
+| ![세션](./assets/images/main.png) |![세션 날짜 선택](./assets/images/main_bar.png) |
 
 <br>
 
@@ -146,7 +154,7 @@ hackathon_P3/
 
 | **참여자 Q&A** | **세션자 Q&A** |
 | :------: | :------: |
-| ![참여자 Q&A](./assets/images/Q&A.png) | ![세션자 Q&A](./assets/images/q&a_admin.png) |
+| ![참여자 Q&A](./assets/images/qna_user.png) | ![세션자 Q&A](./assets/images/qna_admin.png) |
 
 <br>
 
@@ -156,7 +164,7 @@ hackathon_P3/
 
 | **참여자 Contents** | **세션자 Contents** |
 | :------: | :------: |
-| ![참여자_contents](./assets/images/contents.png) | ![세션자_contents](./assets/images/contents_admin.png) |
+| ![참여자_contents](./assets/images/contents_user.png) | ![세션자_contents](./assets/images/contents_admin.png) |
 
 <br>
 
@@ -166,7 +174,7 @@ hackathon_P3/
 
 | **참여자 Notice** | **세션자 Notice** |
 | :------: | :------: |
-| ![참여자_notice](./assets/images/notice.png) | ![세션자_notice](./assets/images/notice_admin.png) |
+| ![참여자_notice](./assets/images/notice_user.png) | ![세션자_notice](./assets/images/notice_admin.png) |
 
 <br>
 
@@ -180,6 +188,16 @@ hackathon_P3/
 | ![sidebar](./assets/images/sidebar.png) |
 
 <br>
+
+### 반응형 구현
+* 실제 사이드 창 사용 환경을 고려한 450px 기준의 반응형 UI
+
+| **참여자 Q&A** | **세션자 Contents** | **세션자 Notice** |
+| :------: | :------: | :------: |
+| ![참여자_qna](./assets/images/responsive_qna.png) | ![세션자_contents](./assets/images/responsive_contents.png) | ![세션자_notice](./assets/images/responsive_notice.png) |
+
+<br>
+
 
 # 🚀 설치 및 실행
 ```bash
