@@ -12,9 +12,12 @@
 
 <div align="center">
   
-| **서비스 로고** | **메인 화면** |
+| **서비스 로고** |
 | :------: |  :------: |
-| ![로고](./assets/images/logo.png) | ![세션](./assets/images/main.png) |
+| ![로고](./assets/images/logo.png) |
+| **메인 화면** |
+| :------: 
+| ![세션](./assets/images/main.png) |
 
 </div>
 
@@ -138,7 +141,7 @@ hackathon_P3/
 * **참여자** 또는 **세션자** 역할을 선택하여 입장
 
 | **초기 화면** |
-| :------: |
+| :------: | :------: |
 | ![세션](./assets/images/main.png) |![세션 날짜 선택](./assets/images/main_bar.png) |
 
 <br>
@@ -188,7 +191,7 @@ hackathon_P3/
 * 실제 사이드 창 사용 환경을 고려한 450px 기준의 반응형 UI
 
 | **참여자 Q&A** | **세션자 Contents** | **세션자 Notice** |
-| :------: |
+| :------: | :------: | :------: |
 | ![참여자_qna](./assets/images/responsive_qna.png) | ![세션자_contents](./assets/images/responsive_contents.png) | ![세션자_notice](./assets/images/responsive_notice.png) |
 
 <br>
