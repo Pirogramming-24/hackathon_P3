@@ -145,7 +145,7 @@ hackathon_P3/
 
 | **초기 화면** | **세션 날짜 선택** |
 | :------: | :------: |
-| ![세션](./assets/images/main2.png) |![세션 날짜 선택](./assets/images/main_bar.png) |
+| ![세션](./assets/images/main.png) |![세션 날짜 선택](./assets/images/main_bar.png) |
 
 <br>
 
