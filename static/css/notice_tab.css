@@ -172,3 +172,9 @@
     color: #888;
     border: 1px dashed #e5e7eb;
 }*/
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #0cbd12;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+}

@@ -13,15 +13,28 @@
 
 /* 수정 모드일 때 강조 */
 .input-form.edit-mode {
-    border-color: #3b82f6;
+    border: none;outline: none;box-shadow: none;
     background-color: #eff6ff;
     border-radius: 12px;
     /* 수정 모드는 조금 더 네모나게 */
 }
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #00462A;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+}
 
 .input-form:focus-within {
-    border-color: #0cbd12;
+    border-color: #00462A;
 }
+.input-field:focus{
+    border-color:#fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+
+}
+
 
 .file-btn {
     color: #444;
