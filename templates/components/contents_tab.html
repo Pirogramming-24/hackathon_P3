@@ -42,17 +42,19 @@
     <div class="input-form">
         <form method="post" action="{% url 'piro_contents:add_content' session.id %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center; flex: 1;">
             {% csrf_token %}
-            <label class="file-btn" for="contentFile" style="cursor: pointer;">➕</label>
+            <label class="file-btn" for="contentFile" style="cursor: pointer;"><i class="bi bi-plus"></i></label>
             <input type="file" name="file" id="contentFile" style="display: none;">
             <label style="display: flex; align-items: center; gap: 4px; font-size: 14px; cursor: pointer;">
                 <input type="checkbox" name="is_progress" value="true">진도
             </label>
             <input type="text" name="content" class="input-field" id="contentInput" placeholder="내용을 입력하세요..." required>
             <button type="submit" class="submit-btn">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!--
+                <svg width="20" height="20" viewBox="0 0 25 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="22" y1="2" x2="11" y2="13"></line>
                     <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
+                </svg>-->
+                <i class="bi bi-arrow-up-short"></i>
             </button>
         </form>
     </div>

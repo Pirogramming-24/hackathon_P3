@@ -11,7 +11,7 @@
                 <div class="question-header">
                     <div class="question-content">
                         <div class="question-text">
-                            <span class="question-label">Q.</span>
+                            <span class="question-label">Q</span>
                             <p class="question-body">{{ question.content }}</p>
                         </div>
                         
@@ -21,7 +21,7 @@
                         
                         {% if question.reply %}
                         <div class="reply-box">
-                            <div class="reply-label">↳ 답변</div>
+                            <div class="reply-label"><i class="bi bi-arrow-return-right"></i></div>
                             <div class="reply-text">{{ question.reply }}</div>
                         </div>
                         {% endif %}
@@ -41,7 +41,7 @@
                     <button class="status-btn {% if question.answered %}answered{% endif %}" 
                             id="status-btn-{{ question.id }}"
                             onclick="event.stopPropagation(); toggleAnswered({{ question.id }})">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="status-icon-{{ question.id }}">
+                        <svg width="18" height="18" viewBox="0 0 22 23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="status-icon-{{ question.id }}">
                             {% if question.answered %}
                             <polyline points="20 6 9 17 4 12"></polyline>
                             {% else %}
@@ -66,14 +66,16 @@
     <div class="input-form">
         <form method="post" action="{% url 'qna:add_question' session.id %}" enctype="multipart/form-data" style="display: flex; gap: 8px; align-items: center; flex: 1;">
             {% csrf_token %}
-            <label class="file-btn" for="imageInput" style="cursor: pointer;">📎</label>
+            <label class="file-btn" for="imageInput" style="cursor: pointer;"><i class="bi bi-plus"></i></label>
             <input type="file" name="image" id="imageInput" style="display: none;" accept="image/*">
             <input type="text" name="content" class="input-field" id="questionInput" placeholder="질문을 입력하세요..." required>
             <button type="submit" class="submit-btn">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="22" y1="2" x2="11" y2="13"></line>
-                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
+                <!--
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"></line>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                    --><i class="bi bi-arrow-up-short"></i>
             </button>
         </form>
     </div>

@@ -1,0 +1,148 @@
+.navbar {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0px;
+    /* 꼭 추가해야 함! */
+    z-index: 1000;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.menu-btn:hover {
+    background: #f3f4f6;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.logo-text-group {
+    display: flex;
+    align-items: baseline;
+    /* 글자 하단 라인을 맞춤 */
+    gap: 2px;
+}
+
+.logo-piro {
+    font-size: 30px;
+    font-weight: bold;
+    color: #000000;
+    letter-spacing: 1px;
+}
+
+.logo-q {
+    font-size: 30px;
+    font-weight: bold;
+    color: #6de849;
+    /* 아까 설정한 초록색과 동일 */
+}
+
+.logo-subtitle {
+    font-size: 14px;
+    /* 메인 로고보다 작게 */
+    color: #94a3b8;
+    /* 부드러운 회색 */
+    font-weight: normal;
+    /* 볼드체 해제 */
+    margin-left: 4px;
+    /* 로고와 약간의 간격 */
+}
+
+.logo img {
+    height: 28px;
+    /*width: auto;
+    display: block;
+*/
+}
+
+.tabs {
+    justify-content: space-between;
+    gap: 4px;
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+}
+
+.tab {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    font-size: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+    color: #6b7280;
+}
+
+.tab:hover {
+    background: #f3f4f6;
+}
+
+.tab.active {
+    background: transparent;
+    color: #6de849;
+}
+
+
+
+@media (max-width: 768px) {
+  
+    .navbar-left{
+        display: none;
+        
+    }
+    .tab {
+        font-size: 16px;         /* 적당한 크기 */
+    padding: 8px 12px;
+    flex: 1 1 auto;           /* 모든 탭이 동일하게 늘어나도록 */
+    text-align: center;
+    white-space: nowrap;
+    }
+    
+    .tabs {
+        width: 100%;
+        display: flex;
+        
+        justify-content: center; /* 가운데 정렬 */
+    gap: 12px;
+    position: static;  /* position:absolute 제거 */
+    transform: none;
+    padding: 8px 0;
+    margin: 0 auto;
+
+}
+    .navbar{
+        padding:10px;
+        flex-direction: column; /* 세로 쌓기 가능 */
+    align-items: stretch;
+    }
+.tab:nth-child(1){
+    margin-left: 50px;
+}
+.tab:nth-child(3){
+    margin-right: 50px;
+}
+}

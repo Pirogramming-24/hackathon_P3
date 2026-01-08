@@ -38,7 +38,10 @@
     /* 둥근 모서리 */
     padding: 24px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+<<<<<<< HEAD
     border-left: 0px solid #0cbd12;
+=======
+>>>>>>> origin/jonghyun
     /* 포인트 컬러 */
     position: relative;
 }
@@ -88,7 +91,19 @@
     background-color: #fdfdfd;
 }
 
+<<<<<<< HEAD
 /* 입력 필드 스타일 */
+=======
+.form-input .text :focus,
+.form-textarea:focus {
+    border-color: #0cbd12;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(12, 189, 18, 0.1);
+}
+
+
+/* 입력 필드 스타일 
+>>>>>>> origin/jonghyun
 .form-input,
 .form-textarea {
     width: 100%;
@@ -100,7 +115,11 @@
     background-color: #fff;
     margin-bottom: 10px;
     box-sizing: border-box;
+<<<<<<< HEAD
     /* 패딩 포함 크기 계산 */
+=======
+    /* 패딩 포함 크기 계산 
+>>>>>>> origin/jonghyun
     font-family: inherit;
 }
 
@@ -116,7 +135,11 @@
     resize: vertical;
 }
 
+<<<<<<< HEAD
 /* 폼 하단 영역 */
+=======
+/* 폼 하단 영역 
+>>>>>>> origin/jonghyun
 .form-footer {
     display: flex;
     justify-content: space-between;
@@ -139,8 +162,13 @@
 .file-btn:hover {
     color: #0cbd12;
 }
+<<<<<<< HEAD
 */
 /* 전송/수정완료 버튼 */
+=======
+
+/* 전송/수정완료 버튼 
+>>>>>>> origin/jonghyun
 .submit-btn {
     background-color: #0cbd12;
     color: white;
@@ -157,12 +185,20 @@
     background-color: #099e0f;
 }
 
+<<<<<<< HEAD
 /* --- 빈 상태 메시지 --- */
 .empty-state {
+=======
+/* --- 빈 상태 메시지 --- 
+>>>>>>> origin/jonghyun
     text-align: center;
     padding: 40px;
     background-color: #f9fafb;
     border-radius: 12px;
     color: #888;
     border: 1px dashed #e5e7eb;
+<<<<<<< HEAD
 }
+=======
+}*/
+>>>>>>> origin/jonghyun
